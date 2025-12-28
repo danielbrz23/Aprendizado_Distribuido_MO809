@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package lab1prc;
+
+// amostra
+message Sample {
+    repeated float features=1;
+    int32 label = 2;
+}
+
+// conjunto de dados
+message Dataset {
+    repeated Sample samples = 1;
+}
+
+message FitRequest {
+    Dataset dataset = 1;
+}
+
+message FitResponse {
+    float accuracy = 1;
+} 
+
+message PredictRequest {
+    repeated float features = 1;
+} 
+
+message PredictResponse {
+    int32 predicted_label = 1;
+}
+
+service ML{
+    rpc train(FitRequest) returns (FitResponse) {};
+    rpc eval(PredictRequest) returns (PredictResponse) {};
+}
